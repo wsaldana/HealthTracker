@@ -34,9 +34,27 @@ const addUsuario = async (req, res) => {
     })
 };
 
+const getHistorialById = async(req, res) => {
+    const response = await pool.query("SELECT * FROM historial_medico WHERE id_historial=$1", [req.params.id]);
+    res.json(response.rows[0]);
+}
+
+const addHistorial = async (req, res) => {
+    const {tipo_de_sangre, padecimientos, cirugias, enfermedades_hereditarias} = req.query;
+    const response = await pool.query("INSERT INTO historial_medico VALUES (default, $1, $2, $3, $4)", [tipo_de_sangre, padecimientos, cirugias, enfermedades_hereditarias]);
+    res.json({
+        message: 'Historial agregado',
+        body: {
+            user: {tipo_de_sangre, padecimientos, cirugias, enfermedades_hereditarias}
+        }
+    })
+};
+
 module.exports = { 
     getUsuarios,
     getUsuario,
     getUsuarioByNombre,
-    addUsuario
+    addUsuario,
+    getHistorialById,
+    addHistorial
 }
