@@ -3,6 +3,21 @@ const parameters = require('./parameters');
 
 const pool = new Pool(parameters);
 
+const login = async(req, res) => {
+    const { email, password } = req.headers;
+    const response = await pool.query("SELECT * FROM usuarios WHERE correo=$1 AND contrasena=crypt($2, contrasena)", [email, password]);
+    if(response.rowCount === 1){
+        res.json({
+            statusCode: 200,
+            body: response.rows[0]
+        });
+    }else{
+        res.json({
+            statusCode: 404
+        });
+    }
+};
+
 const getUsuarios = async (req, res) => {
     const response = await pool.query('SELECT * FROM usuarios');
     res.json({rows: response.rows});
@@ -46,6 +61,7 @@ const addHistorial = async (req, res) => {
 };
 
 module.exports = { 
+    login,
     getUsuarios,
     getUsuario,
     getUsuarioByNombre,

@@ -1,7 +1,9 @@
 const { Router } = require('express');
 const router = Router();
 
-const { getUsuarios, getUsuario, getUsuarioByNombre, addUsuario, getHistorialById, addHistorial} = require('../controllers/index.controller');
+const { login, getUsuarios, getUsuario, getUsuarioByNombre, addUsuario, getHistorialById, addHistorial} = require('../controllers/index.controller');
+
+router.get('/login', login);
 
 router.get('/usuarios', getUsuarios);
 router.get('/usuario/:id', getUsuario);

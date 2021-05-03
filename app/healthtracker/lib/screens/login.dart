@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:healthtracker/screens/Home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class Login extends StatefulWidget {
   @override
@@ -9,6 +13,41 @@ class _LoginState extends State<Login> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
   bool hidePassword = true;
+  bool isLoading = false;
+
+  TextEditingController emailController = new TextEditingController();
+    TextEditingController passwordController = new TextEditingController();
+
+
+  loginApi(String email, String password) async {
+    var uri = Uri.parse('https://03cfbcfc7454.ngrok.io/login');
+    var jsonData;
+
+    Map<String,String> data = {
+      'email': email,
+      'password': password
+    };
+
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var response = await http.get(uri, headers:data);
+
+    if(response.statusCode == 200){
+      jsonData = json.decode(response.body);
+      print(jsonData['statusCode']);
+      if(jsonData['statusCode'] == 200){
+        print(jsonData);
+        setState(() {
+          isLoading = false;
+          sharedPreferences.setString("userData", jsonData['body'].toString());
+          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => Home()), (Route<dynamic> route) => false);
+        });
+      }else{
+        print("--- No se ha encontrado al usuario");
+      }
+    }else{
+      print("--- No se ha podido realizar la consulta con el API");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +90,7 @@ class _LoginState extends State<Login> {
                           ),
 
                           new TextFormField(
+                              controller: emailController,
                               keyboardType: TextInputType.emailAddress,
                               validator: (input) => !input.contains("@")
                                   ? "Ingresar una dirección de correo válida."
@@ -77,6 +117,7 @@ class _LoginState extends State<Login> {
                           ),
 
                           new TextFormField(
+                            controller: passwordController,
                               keyboardType: TextInputType.text,
                               validator: (input) => input.length < 8
                                   ? "La constraseña no puede ser menos a 8 dígitos."
@@ -114,7 +155,12 @@ class _LoginState extends State<Login> {
                           ),
 
                           ElevatedButton(
-                              onPressed: (){}, 
+                              onPressed: (){
+                                setState(() {
+                                  isLoading = true;
+                                });
+                                  loginApi(emailController.text, passwordController.text);
+                              }, 
                               child: Text("Login"),
                               style: ElevatedButton.styleFrom(
                                   elevation: 8,
@@ -140,7 +186,7 @@ class _LoginState extends State<Login> {
                         ],
                       )
                   )
-              )
+              ),
             ])
           ],
         ),
