@@ -1,12 +1,7 @@
 const { Pool } = require('pg');
+const parameters = require('./parameters');
 
-const pool = new Pool({
-    host: 'queenie.db.elephantsql.com',
-    user: 'liomrjgg',
-    password: '0FHVBpKg_av5L96hvsXoMdWlbSRf2n7a',
-    database: 'liomrjgg',
-    port: '5432'
-});
+const pool = new Pool(parameters);
 
 const getUsuarios = async (req, res) => {
     const response = await pool.query('SELECT * FROM usuarios');
