@@ -3,27 +3,34 @@ import 'package:healthtracker/screens/Home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'register.dart';
 
-class Login extends StatefulWidget {
+class Register2 extends StatefulWidget {
   @override
-  _LoginState createState() => _LoginState();
+  _Register2State createState() => _Register2State();
 }
 
-class _LoginState extends State<Login> {
+class _Register2State extends State<Register2> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
-  bool hidePassword = true;
   bool isLoading = false;
 
-  TextEditingController emailController = new TextEditingController();
-  TextEditingController passwordController = new TextEditingController();
+  TextEditingController sangreController = new TextEditingController();
+  TextEditingController padecimientosController = new TextEditingController();
+  TextEditingController cirugiasController = new TextEditingController();
+  TextEditingController enfermedadesHereditariasController =
+      new TextEditingController();
 
-  loginApi(String email, String password) async {
-    var uri = Uri.parse('https://03cfbcfc7454.ngrok.io/login');
+  registerApi(String sangre, String padecimientos, String cirugias,
+      String enfermedades) async {
+    var uri = Uri.parse('https://03cfbcfc7454.ngrok.io/register');
     var jsonData;
 
-    Map<String, String> data = {'email': email, 'password': password};
+    Map<String, String> data = {
+      'tipo de sangre': sangre,
+      'padecimientos': padecimientos,
+      'cirugias': cirugias,
+      'enfermedades': enfermedades
+    };
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var response = await http.get(uri, headers: data);
@@ -75,23 +82,19 @@ class _LoginState extends State<Login> {
                       child: Column(
                         children: [
                           SizedBox(
-                            height: 25,
+                            height: 0,
                           ),
                           Text(
                             "Health Tracker",
                             style: Theme.of(context).textTheme.headline2,
                           ),
                           SizedBox(
-                            height: 20,
+                            height: 40,
                           ),
                           new TextFormField(
-                              controller: emailController,
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (input) => !input.contains("@")
-                                  ? "Ingresar una dirección de correo válida."
-                                  : null,
+                              controller: sangreController,
                               decoration: new InputDecoration(
-                                  hintText: "Email",
+                                  hintText: "Tipo de Sangre",
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Theme.of(context)
@@ -101,20 +104,30 @@ class _LoginState extends State<Login> {
                                       borderSide: BorderSide(
                                           color:
                                               Theme.of(context).accentColor)),
-                                  prefixIcon: Icon(Icons.email,
+                                  prefixIcon: Icon(Icons.add_circle_outline,
+                                      color: Theme.of(context).accentColor))),
+                          new TextFormField(
+                              controller: padecimientosController,
+                              decoration: new InputDecoration(
+                                  hintText: "Padecimientos",
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Theme.of(context)
+                                              .accentColor
+                                              .withOpacity(0.2))),
+                                  focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color:
+                                              Theme.of(context).accentColor)),
+                                  prefixIcon: Icon(Icons.local_hotel,
                                       color: Theme.of(context).accentColor))),
                           SizedBox(
-                            height: 20,
+                            height: 0,
                           ),
                           new TextFormField(
-                              controller: passwordController,
-                              keyboardType: TextInputType.text,
-                              validator: (input) => input.length < 8
-                                  ? "La constraseña no puede ser menos a 8 dígitos."
-                                  : null,
-                              obscureText: hidePassword,
+                              controller: cirugiasController,
                               decoration: new InputDecoration(
-                                  hintText: "Constraseña",
+                                  hintText: "Cirugias",
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Theme.of(context)
@@ -124,52 +137,45 @@ class _LoginState extends State<Login> {
                                       borderSide: BorderSide(
                                           color:
                                               Theme.of(context).accentColor)),
-                                  prefixIcon: Icon(Icons.lock,
-                                      color: Theme.of(context).accentColor),
-                                  suffixIcon: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          hidePassword = !hidePassword;
-                                        });
-                                      },
-                                      color: Theme.of(context)
-                                          .accentColor
-                                          .withOpacity(0.2),
-                                      icon: Icon(hidePassword
-                                          ? Icons.visibility_off
-                                          : Icons.visibility)))),
+                                  prefixIcon: Icon(Icons.location_city,
+                                      color: Theme.of(context).accentColor))),
+                          new TextFormField(
+                              controller: enfermedadesHereditariasController,
+                              decoration: new InputDecoration(
+                                  hintText: "Enfermedades Hereditarias",
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Theme.of(context)
+                                              .accentColor
+                                              .withOpacity(0.2))),
+                                  focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color:
+                                              Theme.of(context).accentColor)),
+                                  prefixIcon: Icon(Icons.person_add_alt_1,
+                                      color: Theme.of(context).accentColor))),
                           SizedBox(
-                            height: 30,
+                            height: 40,
                           ),
                           ElevatedButton(
                               onPressed: () {
                                 setState(() {
                                   isLoading = true;
                                 });
-                                loginApi(emailController.text,
-                                    passwordController.text);
+                                registerApi(
+                                  sangreController.text,
+                                  padecimientosController.text,
+                                  cirugiasController.text,
+                                  enfermedadesHereditariasController.text,
+                                );
                               },
-                              child: Text("Login"),
+                              child: Text("Ingresar historial medico"),
                               style: ElevatedButton.styleFrom(
                                   elevation: 8,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(6)),
                                   padding: EdgeInsets.symmetric(
                                       vertical: 10, horizontal: 100))),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Register()),
-                                );
-                              },
-                              child: Text("Registrarse"),
-                              style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(6)),
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 80)))
                         ],
                       ))),
             ])

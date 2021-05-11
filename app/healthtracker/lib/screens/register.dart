@@ -3,14 +3,15 @@ import 'package:healthtracker/screens/Home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'register.dart';
+import 'login.dart';
+import 'register2.dart';
 
-class Login extends StatefulWidget {
+class Register extends StatefulWidget {
   @override
-  _LoginState createState() => _LoginState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
   bool hidePassword = true;
@@ -18,9 +19,11 @@ class _LoginState extends State<Login> {
 
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+  TextEditingController nameController = new TextEditingController();
+  TextEditingController phoneController = new TextEditingController();
 
-  loginApi(String email, String password) async {
-    var uri = Uri.parse('https://03cfbcfc7454.ngrok.io/login');
+  registerApi(String email, String password, String name, String phone) async {
+    var uri = Uri.parse('https://03cfbcfc7454.ngrok.io/register');
     var jsonData;
 
     Map<String, String> data = {'email': email, 'password': password};
@@ -75,15 +78,30 @@ class _LoginState extends State<Login> {
                       child: Column(
                         children: [
                           SizedBox(
-                            height: 25,
+                            height: 0,
                           ),
                           Text(
                             "Health Tracker",
                             style: Theme.of(context).textTheme.headline2,
                           ),
                           SizedBox(
-                            height: 20,
+                            height: 40,
                           ),
+                          new TextFormField(
+                              controller: nameController,
+                              decoration: new InputDecoration(
+                                  hintText: "Nombre",
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Theme.of(context)
+                                              .accentColor
+                                              .withOpacity(0.2))),
+                                  focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color:
+                                              Theme.of(context).accentColor)),
+                                  prefixIcon: Icon(Icons.account_box_rounded,
+                                      color: Theme.of(context).accentColor))),
                           new TextFormField(
                               controller: emailController,
                               keyboardType: TextInputType.emailAddress,
@@ -104,7 +122,7 @@ class _LoginState extends State<Login> {
                                   prefixIcon: Icon(Icons.email,
                                       color: Theme.of(context).accentColor))),
                           SizedBox(
-                            height: 20,
+                            height: 0,
                           ),
                           new TextFormField(
                               controller: passwordController,
@@ -114,7 +132,7 @@ class _LoginState extends State<Login> {
                                   : null,
                               obscureText: hidePassword,
                               decoration: new InputDecoration(
-                                  hintText: "Constraseña",
+                                  hintText: "Contraseña",
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Theme.of(context)
@@ -138,18 +156,44 @@ class _LoginState extends State<Login> {
                                       icon: Icon(hidePassword
                                           ? Icons.visibility_off
                                           : Icons.visibility)))),
+                          new TextFormField(
+                              controller: phoneController,
+                              decoration: new InputDecoration(
+                                  hintText: "Telefono",
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Theme.of(context)
+                                              .accentColor
+                                              .withOpacity(0.2))),
+                                  focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color:
+                                              Theme.of(context).accentColor)),
+                                  prefixIcon: Icon(Icons.phone,
+                                      color: Theme.of(context).accentColor))),
                           SizedBox(
-                            height: 30,
+                            height: 40,
                           ),
                           ElevatedButton(
                               onPressed: () {
                                 setState(() {
                                   isLoading = true;
                                 });
-                                loginApi(emailController.text,
-                                    passwordController.text);
+                                /*
+                                registerApi(
+                                  emailController.text,
+                                  passwordController.text,
+                                  nameController.text,
+                                  phoneController.text,
+                                );*/
+
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Register2()),
+                                );
                               },
-                              child: Text("Login"),
+                              child: Text("Registrarse"),
                               style: ElevatedButton.styleFrom(
                                   elevation: 8,
                                   shape: RoundedRectangleBorder(
@@ -161,10 +205,10 @@ class _LoginState extends State<Login> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Register()),
+                                      builder: (context) => Login()),
                                 );
                               },
-                              child: Text("Registrarse"),
+                              child: Text("¿Ya tiene cuenta? Regresar"),
                               style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(6)),
