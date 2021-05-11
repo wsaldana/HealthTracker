@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 
-const { login, getUsuarios, getUsuario, getUsuarioByNombre, addUsuario, getHistorialById, addHistorial} = require('../controllers/index.controller');
+const { login, getUsuarios, getUsuario, getUsuarioByNombre, addUsuario, getHistoriales, getHistorialById, addHistorial} = require('../controllers/index.controller');
 
 router.get('/login', login);
 
@@ -10,7 +10,8 @@ router.get('/usuario/:id', getUsuario);
 router.get('/usuarios/:nombre', getUsuarioByNombre);
 router.post('/usuario/', addUsuario);
 
+router.get('/historiales', getHistoriales);
 router.get('/historiales/:id', getHistorialById);
-router.post('/historial/', addHistorial);
+router.post('/historial', addHistorial);
 
 module.exports = router;

@@ -20,20 +20,19 @@ class _Register2State extends State<Register2> {
   TextEditingController enfermedadesHereditariasController =
       new TextEditingController();
 
-  registerApi(String sangre, String padecimientos, String cirugias,
-      String enfermedades) async {
-    var uri = Uri.parse('https://03cfbcfc7454.ngrok.io/register');
+  registerApi(String sangre, String padecimientos, String cirugias, String enfermedades) async {
+    var uri = Uri.parse('https://1fb1412a1301.ngrok.io/historial');
     var jsonData;
 
     Map<String, String> data = {
-      'tipo de sangre': sangre,
+      'tipo_de_sangre': sangre,
       'padecimientos': padecimientos,
       'cirugias': cirugias,
-      'enfermedades': enfermedades
+      'enfermedades_hereditarias': enfermedades
     };
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var response = await http.get(uri, headers: data);
+    var response = await http.post(uri, body: data);
 
     if (response.statusCode == 200) {
       jsonData = json.decode(response.body);
@@ -42,13 +41,13 @@ class _Register2State extends State<Register2> {
         print(jsonData);
         setState(() {
           isLoading = false;
-          sharedPreferences.setString("userData", jsonData['body'].toString());
+          sharedPreferences.setString("userMedicalHistory", jsonData['body'].toString());
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (BuildContext context) => Home()),
               (Route<dynamic> route) => false);
         });
       } else {
-        print("--- No se ha encontrado al usuario");
+        print("--- No se ha podido registrar el historial");
       }
     } else {
       print("--- No se ha podido realizar la consulta con el API");

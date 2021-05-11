@@ -23,13 +23,13 @@ class _RegisterState extends State<Register> {
   TextEditingController phoneController = new TextEditingController();
 
   registerApi(String email, String password, String name, String phone) async {
-    var uri = Uri.parse('https://03cfbcfc7454.ngrok.io/register');
+    var uri = Uri.parse('https://1fb1412a1301.ngrok.io/usuario');
     var jsonData;
 
-    Map<String, String> data = {'email': email, 'password': password, 'nombre': name, 'telefono': phone};
+    Map<String, String> data = {'correo': email, 'contrasena': password, 'nombre': name, 'telefono': phone};
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var response = await http.get(uri, headers: data);
+    var response = await http.post(uri, body: data);
 
     if (response.statusCode == 200) {
       jsonData = json.decode(response.body);
@@ -40,11 +40,11 @@ class _RegisterState extends State<Register> {
           isLoading = false;
           sharedPreferences.setString("userData", jsonData['body'].toString());
           Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (BuildContext context) => Home()),
+              MaterialPageRoute(builder: (BuildContext context) => Register2()),
               (Route<dynamic> route) => false);
         });
       } else {
-        print("--- No se ha encontrado al usuario");
+        print("--- No se ha podido registrar al usuario");
       }
     } else {
       print("--- No se ha podido realizar la consulta con el API");
@@ -175,24 +175,12 @@ class _RegisterState extends State<Register> {
                             height: 40,
                           ),
                           ElevatedButton(
-                              onPressed: () {
+                              onPressed: (){
                                 setState(() {
                                   isLoading = true;
                                 });
-                                /*
-                                registerApi(
-                                  emailController.text,
-                                  passwordController.text,
-                                  nameController.text,
-                                  phoneController.text,
-                                );*/
-
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Register2()),
-                                );
-                              },
+                                  registerApi(emailController.text, passwordController.text, nameController.text, phoneController.text);
+                              }, 
                               child: Text("Registrarse"),
                               style: ElevatedButton.styleFrom(
                                   elevation: 8,

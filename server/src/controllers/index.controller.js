@@ -34,14 +34,21 @@ const getUsuarioByNombre = async(req, res) => {
 }
 
 const addUsuario = async (req, res) => {
-    const {nombre, correo, contrasena, telefono, historial} = req.query;
+    const {nombre, correo, contrasena, telefono, historial} = req.body;
+    console.log(req)
     const response = await pool.query("INSERT INTO usuarios VALUES (default, $1, $2, crypt($3, gen_salt('bf')), $4, $5)", [nombre, correo, contrasena, telefono, historial]);
     res.json({
+        statusCode: 200,
         message: 'User added',
         body: {
             user: {nombre, correo, contrasena, telefono, historial}
         }
     })
+};
+
+const getHistoriales = async (req, res) => {
+    const response = await pool.query('SELECT * FROM historial_medico');
+    res.json({rows: response.rows});
 };
 
 const getHistorialById = async(req, res) => {
@@ -50,12 +57,13 @@ const getHistorialById = async(req, res) => {
 }
 
 const addHistorial = async (req, res) => {
-    const {tipo_de_sangre, padecimientos, cirugias, enfermedades_hereditarias} = req.query;
+    const {tipo_de_sangre, padecimientos, cirugias, enfermedades_hereditarias} = req.body;
     const response = await pool.query("INSERT INTO historial_medico VALUES (default, $1, $2, $3, $4)", [tipo_de_sangre, padecimientos, cirugias, enfermedades_hereditarias]);
     res.json({
+        statusCode: 200,
         message: 'Historial agregado',
         body: {
-            user: {tipo_de_sangre, padecimientos, cirugias, enfermedades_hereditarias}
+            medical_history: {tipo_de_sangre, padecimientos, cirugias, enfermedades_hereditarias}
         }
     })
 };
@@ -66,6 +74,7 @@ module.exports = {
     getUsuario,
     getUsuarioByNombre,
     addUsuario,
+    getHistoriales,
     getHistorialById,
     addHistorial
 }
