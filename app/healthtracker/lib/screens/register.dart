@@ -26,7 +26,7 @@ class _RegisterState extends State<Register> {
     var uri = Uri.parse('https://03cfbcfc7454.ngrok.io/register');
     var jsonData;
 
-    Map<String, String> data = {'email': email, 'password': password};
+    Map<String, String> data = {'email': email, 'password': password, 'nombre': name, 'telefono': phone};
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var response = await http.get(uri, headers: data);
