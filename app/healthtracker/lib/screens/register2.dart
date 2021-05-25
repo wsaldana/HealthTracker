@@ -21,7 +21,7 @@ class _Register2State extends State<Register2> {
       new TextEditingController();
 
   registerApi(String sangre, String padecimientos, String cirugias, String enfermedades) async {
-    var uri = Uri.parse('https://1fb1412a1301.ngrok.io/historial');
+    var uri = Uri.parse('https://83ef0fc67729.ngrok.io/historial');
     var jsonData;
 
     Map<String, String> data = {

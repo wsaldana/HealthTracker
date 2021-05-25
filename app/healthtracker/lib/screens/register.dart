@@ -23,7 +23,7 @@ class _RegisterState extends State<Register> {
   TextEditingController phoneController = new TextEditingController();
 
   registerApi(String email, String password, String name, String phone) async {
-    var uri = Uri.parse('https://1fb1412a1301.ngrok.io/usuario');
+    var uri = Uri.parse('https://83ef0fc67729.ngrok.io/usuario');
     var jsonData;
 
     Map<String, String> data = {'correo': email, 'contrasena': password, 'nombre': name, 'telefono': phone};
