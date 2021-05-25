@@ -4,6 +4,7 @@ const app = express();
 //Middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+app.disable('etag');
 
 //Creacion de rutas
 app.use(require('./routes/index.routes'));

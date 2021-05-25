@@ -43,9 +43,7 @@ class InfoPaciente extends StatelessWidget {
                 )
               ),
 
-              SizedBox(
-                height: 10,
-              ),
+              
 
               Center(
                 child: TextButton.icon(
