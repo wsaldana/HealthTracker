@@ -68,6 +68,11 @@ const addHistorial = async (req, res) => {
     })
 };
 
+const getPacientesByMedico = async (req, res) => {
+    const response = await pool.query("SELECT * FROM usuarios u INNER JOIN historial_medico hm ON u.historial_medico = hm.id_historial WHERE u.medico = $1", [req.params.id_medico]);
+    res.json(response.rows);
+}
+
 module.exports = { 
     login,
     getUsuarios,
@@ -76,5 +81,6 @@ module.exports = {
     addUsuario,
     getHistoriales,
     getHistorialById,
-    addHistorial
+    addHistorial,
+    getPacientesByMedico
 }
