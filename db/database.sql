@@ -46,7 +46,7 @@ INSERT INTO historial_medico VALUES
 	(default, 'O+', 'Alergias a la kriptonita', 'Cirugías random', 'No se'), 
 	(default, 'AB+', 'Ejemplo de padecimientos', 'N/A', 'Puede ser');
 
-NSERT INTO usuarios VALUES 
+INSERT INTO usuarios VALUES 
 	(default, 'Luisa Hernandez', 'luisa@gmail.com', crypt('123', gen_salt('bf')), '502 1234-5678', '8 meses de embarazo sin complicaciones', 'https://farm4.static.flickr.com/3424/3729244504_07ae21e6a9_o.png', 1,1),
 	(default, 'Fiona de Shrek', 'fiona@gmail.com', crypt('456', gen_salt('bf')), '502 32165498',  '7 meses de embarazo con diabetes', 'https://img.women.com/images/images/000/027/550/large/Shrek_Fiona_Hero_Image.png.jpg?1470702831', 1,2),
 	(default, 'Patricia Estrella', 'paty@gmail.com', crypt('789', gen_salt('bf')), '502 14725836', '9 meses de embarazo con retraso de fecha', 'https://i.pinimg.com/736x/17/91/b5/1791b5696a8a7dace26ad529d5244c92.jpg', 1, 3),
