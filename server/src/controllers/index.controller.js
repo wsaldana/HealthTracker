@@ -35,7 +35,6 @@ const getUsuarioByNombre = async(req, res) => {
 
 const addUsuario = async (req, res) => {
     const {nombre, correo, contrasena, telefono, historial} = req.body;
-    console.log(req)
     const response = await pool.query("INSERT INTO usuarios VALUES (default, $1, $2, crypt($3, gen_salt('bf')), $4, $5)", [nombre, correo, contrasena, telefono, historial]);
     res.json({
         statusCode: 200,
@@ -73,6 +72,34 @@ const getPacientesByMedico = async (req, res) => {
     res.json(response.rows);
 }
 
+const addRegistroSintomas = async (req, res) => {
+    const {dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres, presion, niveles_azucar, peso, fecha, id_usuario} = req.body;
+    const response = await pool.query("INSERT INTO sintomas VALUES (default, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10)", [dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres, presion, niveles_azucar, peso, fecha, id_usuario]);
+    res.json({
+        statusCode: 200,
+        message: 'Symptoms added',
+        body: {
+            symptoms: {dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres, presion, niveles_azucar, peso, fecha, id_usuario}
+        }
+    })
+}
+
+const getListRegistrosSintomas = async (req, res) => {
+    const response = await pool.query("SELECT * FROM sintomas WHERE id_usuario = $1", [req.params.id_usuario]);
+    res.json(response.rows);
+}
+
+const getRegistroSintomas = async (req, res) => {
+    const { id_usuario, fecha } = req.headers;
+    const response;
+    if(fecha){
+        response = await pool.query("SELECT * FROM sintomas WHERE id_usuario = $1 AND fecha = $2", [id_usuario, fecha]);
+    }else{
+        response = await pool.query("SELECT * FROM sintomas WHERE id_usuario = $1 ORDER BY fecha DESC LIMIT 1", [id_usuario]);
+    }
+    res.json(response.rows);
+}
+
 module.exports = { 
     login,
     getUsuarios,
@@ -82,5 +109,8 @@ module.exports = {
     getHistoriales,
     getHistorialById,
     addHistorial,
-    getPacientesByMedico
+    getPacientesByMedico,
+    addRegistroSintomas,
+    getListRegistrosSintomas,
+    getRegistroSintomas
 }
