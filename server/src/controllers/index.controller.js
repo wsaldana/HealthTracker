@@ -91,7 +91,7 @@ const getListRegistrosSintomas = async (req, res) => {
 
 const getRegistroSintomas = async (req, res) => {
     const { id_usuario, fecha } = req.headers;
-    const response;
+    let response;
     if(fecha){
         response = await pool.query("SELECT * FROM sintomas WHERE id_usuario = $1 AND fecha = $2", [id_usuario, fecha]);
     }else{
