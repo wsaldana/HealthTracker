@@ -1,7 +1,14 @@
 const { Pool } = require('pg');
-const parameters = require('./parameters');
+//const parameters = require('./parameters');
+const { NODE_ENV } = require('../../config');
 
-const pool = new Pool(parameters);
+const pool = new Pool({
+    'host': process.env.DB_HOST,
+    'user': process.env.DB_USER,
+    'password': process.env.DB_PASSWORD,
+    'database': process.env.DB_DATABASE,
+    'port': process.env.DB_PORT
+});
 
 const login = async(req, res) => {
     const { email, password } = req.headers;
