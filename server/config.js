@@ -10,7 +10,6 @@ if (!('error' in result)) {
 } else {
   envs = {};
   lodash.each(process.env, (value, key) => envs[key] = value);
-  console.log(envs)
 }
 
 module.exports = envs;

@@ -20,7 +20,7 @@ class _LoginState extends State<Login> {
   TextEditingController passwordController = new TextEditingController();
 
   loginApi(String email, String password) async {
-    var uri = Uri.parse('https://83ef0fc67729.ngrok.io/login');
+    var uri = Uri.parse('https://health-tracker-api-uvg.herokuapp.com/login');
     var jsonData;
 
     Map<String, String> data = {'email': email, 'password': password};
