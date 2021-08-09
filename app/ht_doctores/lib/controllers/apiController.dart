@@ -6,7 +6,7 @@ class ApiController {
   
   Future<List<Paciente>> getPacientesByMedico(int idMedico) async{
     
-    var uri = Uri.parse('https://7a2cfaf62a96.ngrok.io/usuariosByMedico/'+idMedico.toString());
+    var uri = Uri.parse('https://health-tracker-api-uvg.herokuapp.com/usuariosByMedico/'+idMedico.toString());
     var jsonData;
     print("Simon");
     final response = await http.get(uri);
