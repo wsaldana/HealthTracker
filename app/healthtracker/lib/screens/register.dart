@@ -102,6 +102,24 @@ class _RegisterState extends State<Register> {
                                               Theme.of(context).accentColor)),
                                   prefixIcon: Icon(Icons.account_box_rounded,
                                       color: Theme.of(context).accentColor))),
+                          new TextFormField(
+                              controller: emailController,
+                              keyboardType: TextInputType.emailAddress,
+                              validator: (input) => !input.contains("@")
+                                  ? "Ingresar una dirección de correo válida."
+                                  : null,
+                              decoration: new InputDecoration(
+                                  hintText: "Email",
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Theme.of(context)
+                                              .withOpacity(0.2))),
+                                  focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color:
+                                              Theme.of(context).accentColor)),
+                                  prefixIcon: Icon(Icons.email,
+                                      color: Theme.of(context).accentColor))),
                           SizedBox(
                             height: 0,
                           ),

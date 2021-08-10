@@ -149,6 +149,22 @@ class _LoginState extends State<Login> {
                                 loginApi(emailController.text,
                                     passwordController.text);
                               },
+                              child: Text("Login"),
+                              style: ElevatedButton.styleFrom(
+                                  elevation: 9,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(6)),
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 100))),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Register()),
+                                );
+                              },
+
                               child: Text("Registrarse"),
                               style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
