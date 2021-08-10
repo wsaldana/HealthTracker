@@ -9,6 +9,8 @@ class Symptoms extends StatefulWidget {
 
 class _SymptomsState extends State<Symptoms> {
 
+  TextEditingController emailController = new TextEditingController();
+
   final sintomas = [
     ListaSintomas(title: 'Sangrados'),
     ListaSintomas(title: 'Calambres'),
@@ -16,6 +18,29 @@ class _SymptomsState extends State<Symptoms> {
     ListaSintomas(title: 'Molestia en espalda baja'),
     ListaSintomas(title: 'Dolor de cabeza'),
   ];
+
+
+  getCheckboxItems(){
+    sintomas.forEach((key, value) {
+      if(sintomas == true)
+      {
+        valuesList.add(key); 
+      }
+  });
+
+  registrarSintomas(bool dolor_cabeza, bool molestia_espalda_baja, bool diarrea, bool sangrados, bool calambres) async{
+    var uri = Uri.parse('https://health-tracker-api-uvg.herokuapp.com/sintomas');
+    var jsonData;
+    
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    id_usuario = json.decode(sharedPreferences.getString('userData')).id_usuario;
+
+    String fecha = DateTime now = new DateTime.now();
+
+    Map<String, String> data = {'dolor_cabeza': dolor_cabeza, 'molestia_espalda_baja': molestia_espalda_baja, 'diarrea':diarrea, 'sangrados':sangrados,  'calambres':calambres, 'fecha':fecha, 'id_usuario':id_usuario};
+    
+    var response = await http.post(uri, body: data);
+  }
 
   Widget build(BuildContext context) => Scaffold(
     
