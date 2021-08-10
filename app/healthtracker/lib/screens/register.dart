@@ -113,6 +113,7 @@ class _RegisterState extends State<Register> {
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Theme.of(context)
+                                              .accentColor
                                               .withOpacity(0.2))),
                                   focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
