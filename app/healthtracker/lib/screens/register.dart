@@ -196,7 +196,7 @@ class _RegisterState extends State<Register> {
                                       builder: (context) => Login()),
                                 );
                               },
-                              child: Text("¿Ya tiene cuenta? Regresar"),
+                              child: Text("¿Ya tienes cuenta? Regresar"),
                               style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(6)),

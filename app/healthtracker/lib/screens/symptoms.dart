@@ -19,7 +19,6 @@ class _SymptomsState extends State<Symptoms> {
     ListaSintomas(title: 'Dolor de cabeza'),
   ];
 
-
   getCheckboxItems(){
     sintomas.forEach((key, value) {
       if(sintomas == true)
@@ -137,30 +136,10 @@ class _SymptomsState extends State<Symptoms> {
             ])
           ],
         ),
-      ),
-    // body: ListView(
-    //   children: [
-    //     ...sintomas.map(sympList2).toList(),
-    //     Container(
-    //               width: double.infinity,
-    //               padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-    //               margin: EdgeInsets.symmetric(vertical: 85, horizontal: 20),
-    //               decoration: BoxDecoration(
-    //                   borderRadius: BorderRadius.circular(20),
-    //                   color: Theme.of(context).primaryColor,
-    //                   boxShadow: [
-    //                     BoxShadow(
-    //                         color: Theme.of(context).hintColor.withOpacity(0.2),
-    //                         offset: Offset(0, 10),
-    //                         blurRadius: 20)
-    //                   ]),
-    //                   )
-    //   ],
-    //   ),
-      
+      ),  
   );
 
-//lista de sintomas individualmente
+// Lista de los sintomas de la paciente
   Widget sympList2(ListaSintomas lista) => symplist(
     lista: lista,
     onClicked: () {
@@ -171,7 +150,7 @@ class _SymptomsState extends State<Symptoms> {
     }
   );
 
-//prueba inicial de sintomas
+// Prueba 
   Widget symplist({
 
     ListaSintomas lista, 
@@ -201,3 +180,14 @@ class ListaSintomas {
     this.value = false,
   });
 }
+
+
+
+
+
+
+
+
+
+
+
