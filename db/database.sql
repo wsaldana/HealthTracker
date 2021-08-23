@@ -165,4 +165,18 @@ id_usuario = 23
 or
 id_usuario = 24
 or
-id_usuario = 28;
+id_usuario = 28
+or
+id_usuario = 7
+or
+id_usuario = 8
+or
+id_usuario = 9
+or
+id_usuario = 10
+or
+id_usuario = 11;
+
+
+ALTER TABLE usuarios
+ADD UNIQUE (correo);
