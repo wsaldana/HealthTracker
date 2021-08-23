@@ -133,3 +133,36 @@ CHECK (
 );
     
     insert into sintomas values (2, 1, 4, 10, 2, 150.5, '2021-08-06', 1, 10)
+
+SELECT * FROM usuarios;
+
+DELETE FROM usuarios
+WHERE id_usuario = 12;
+
+DELETE FROM usuarios
+WHERE 
+id_usuario = 13 
+or 
+id_usuario = 14
+or
+id_usuario = 15
+or
+id_usuario = 16
+or
+id_usuario = 17
+or
+id_usuario = 18
+or
+id_usuario = 19
+or
+id_usuario = 20
+or
+id_usuario = 21
+or
+id_usuario = 22
+or
+id_usuario = 23
+or
+id_usuario = 24
+or
+id_usuario = 28;
