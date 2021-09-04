@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ht_doctores/views/SymptomsForm.dart';
 import '../models/paciente.dart';
+import 'SymptomsForm.dart';
 
 class InfoPaciente extends StatelessWidget {
   final Paciente paciente;
@@ -95,8 +97,12 @@ class InfoPaciente extends StatelessWidget {
 
               Center(
                 child: ElevatedButton(
-                  onPressed: (){}, 
-                  child: Text("Análisis"),
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return Symptoms();
+                    }));
+                  }, 
+                  child: Text("Síntomas"),
                   style: ElevatedButton.styleFrom(
                     elevation: 8,
                     shape: RoundedRectangleBorder(
