@@ -17,7 +17,7 @@ class _Rating extends State<Rating> {
     if (index < _current) {
       return Icon(Icons.circle, color: Theme.of(context).accentColor);
     } else {
-      return Icon(Icons.circle_outlined);
+      return Icon(Icons.circle);
     }
   }
 
