@@ -81,4 +81,102 @@ niveles_azucar float, peso float, fecha date not null )
 
 alter table sintomas add id_usuario int, add foreign key (id_usuario) references usuarios(id_usuario)
 
+select * from sintomas s 
 
+ALTER TABLE sintomas 
+    ALTER COLUMN diarrea TYPE int,
+    ALTER COLUMN sangrados TYPE int,
+    ALTER COLUMN dolor_cabeza TYPE int,
+    ALTER COLUMN molestia_espalda_baja TYPE int,
+    ALTER COLUMN calambres TYPE int
+
+    insert into sintomas values (1.4, 2.5, 1.5, 1.4, 1.4, null, null, 150.5, '2021-08-06', 1, 9)
+
+ALTER TABLE sintomas 
+DROP COLUMN presion,
+DROP COLUMN niveles_azucar,
+DROP COLUMN peso;
+
+
+ALTER TABLE sintomas 
+ADD CONSTRAINT rango_dolor_cabeza 
+CHECK (
+	dolor_cabeza >= 0 and dolor_cabeza <=10
+);
+    
+ALTER TABLE sintomas 
+ADD CONSTRAINT rango_molestia_espalda_baja 
+CHECK (
+	molestia_espalda_baja >= 0 and molestia_espalda_baja <=10
+
+);
+    
+ALTER TABLE sintomas 
+ADD CONSTRAINT rango_diarrea 
+CHECK (
+	diarrea >= 0 and diarrea <=10
+
+);
+
+ALTER TABLE sintomas 
+ADD CONSTRAINT rango_sangrados 
+CHECK (
+	sangrados >= 0 and sangrados <=10
+
+);
+
+ALTER TABLE sintomas 
+ADD CONSTRAINT rango_calambres 
+CHECK (
+	calambres >= 0 and calambres <=10
+
+);
+    
+    insert into sintomas values (2, 1, 4, 10, 2, 150.5, '2021-08-06', 1, 10)
+
+SELECT * FROM usuarios;
+
+DELETE FROM usuarios
+WHERE id_usuario = 12;
+
+DELETE FROM usuarios
+WHERE 
+id_usuario = 13 
+or 
+id_usuario = 14
+or
+id_usuario = 15
+or
+id_usuario = 16
+or
+id_usuario = 17
+or
+id_usuario = 18
+or
+id_usuario = 19
+or
+id_usuario = 20
+or
+id_usuario = 21
+or
+id_usuario = 22
+or
+id_usuario = 23
+or
+id_usuario = 24
+or
+id_usuario = 28
+or
+id_usuario = 7
+or
+id_usuario = 8
+or
+id_usuario = 9
+or
+id_usuario = 10
+or
+id_usuario = 11;
+
+
+ALTER TABLE usuarios
+ADD UNIQUE (correo);

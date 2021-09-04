@@ -151,7 +151,7 @@ class _LoginState extends State<Login> {
                               },
                               child: Text("Login"),
                               style: ElevatedButton.styleFrom(
-                                  elevation: 8,
+                                  elevation: 9,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(6)),
                                   padding: EdgeInsets.symmetric(
@@ -164,6 +164,7 @@ class _LoginState extends State<Login> {
                                       builder: (context) => Register()),
                                 );
                               },
+
                               child: Text("Registrarse"),
                               style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
