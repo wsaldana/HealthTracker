@@ -8,16 +8,14 @@ class ApiController {
   Future<bool> registrarSintomas(int dolorCabeza, int molestiaEspaldaBaja, int diarrea, int sangrados, int calambres, int idUsuario) async {
     var uri = Uri.parse(apiUrl+'/sintomas');
     var jsonData;
-
-    print(DateTime.now().toString());
-
+    
     Map<String, String> data = {
       'dolor_cabeza': dolorCabeza.toString(), 
       'molestia_espalda_baja': molestiaEspaldaBaja.toString(), 
       'diarrea': diarrea.toString(), 
       'sangrados': sangrados.toString(), 
       'calambres': calambres.toString(), 
-      'idUsuario': idUsuario.toString(), 
+      'id_usuario': idUsuario.toString(), 
       'fecha': DateTime.now().toString()
     };
     final response = await http.post(uri, body: data);
