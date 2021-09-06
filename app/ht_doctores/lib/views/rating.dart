@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Rating extends StatefulWidget {
+  final int valor;
   final int maxNum;
   final Function(int) onNum;
 
-  Rating(this.onNum, [this.maxNum = 5]);
+  Rating(this.valor, this.onNum, [this.maxNum = 5]);
 
   @override
   _Rating createState() => _Rating();
@@ -23,16 +24,11 @@ class _Rating extends State<Rating> {
 
   Widget _buildBody() {
     final num = List<Widget>.generate(this.widget.maxNum, (index) {
+      setState(() {
+        _current = this.widget.valor;
+      });
       return GestureDetector(
         child: _buildRating(index),
-        onTap: () {
-          setState(() {
-            _current = index + 1;
-          });
-          print(index);
-
-          this.widget.onNum(_current);
-        },
       );
     });
 

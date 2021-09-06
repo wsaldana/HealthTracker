@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ht_doctores/views/rating.dart';
+import '../models/sintomas.dart';
 
 class Symptoms extends StatefulWidget {
+  final Sintomas sintoma;
+  Symptoms(this.sintoma);
   @override
   State<StatefulWidget> createState() {
     return _SymptomsState();
@@ -19,7 +22,8 @@ class ListaSintomas {
 }
 
 class _SymptomsState extends State<Symptoms> {
-  int _rating;
+  int valor;
+  int rating;
   final sintomas = [
     ListaSintomas(title: 'Sangrados'),
     ListaSintomas(title: 'Calambres'),
@@ -85,9 +89,10 @@ class _SymptomsState extends State<Symptoms> {
                         SizedBox(
                           height: 25,
                         ),
-                        Rating((rating) {
+                        Rating((valor), (rating) {
                           setState(() {
-                            _rating = rating;
+                            valor = widget.sintoma.sangrados;
+                            rating = valor;
                           });
                         }),
                         SizedBox(
@@ -104,9 +109,10 @@ class _SymptomsState extends State<Symptoms> {
                         SizedBox(
                           height: 25,
                         ),
-                        Rating((rating) {
+                        Rating((valor), (rating) {
                           setState(() {
-                            _rating = rating;
+                            valor = widget.sintoma.calambres;
+                            rating = valor;
                           });
                         }),
                         SizedBox(
@@ -123,9 +129,10 @@ class _SymptomsState extends State<Symptoms> {
                         SizedBox(
                           height: 25,
                         ),
-                        Rating((rating) {
+                        Rating((valor), (rating) {
                           setState(() {
-                            _rating = rating;
+                            valor = widget.sintoma.diarrea;
+                            rating = valor;
                           });
                         }),
                         SizedBox(
@@ -142,9 +149,10 @@ class _SymptomsState extends State<Symptoms> {
                         SizedBox(
                           height: 25,
                         ),
-                        Rating((rating) {
+                        Rating((valor), (rating) {
                           setState(() {
-                            _rating = rating;
+                            valor = widget.sintoma.molestiaEspaldaBaja;
+                            rating = valor;
                           });
                         }),
                         SizedBox(
@@ -161,9 +169,10 @@ class _SymptomsState extends State<Symptoms> {
                         SizedBox(
                           height: 25,
                         ),
-                        Rating((rating) {
+                        Rating((valor), (rating) {
                           setState(() {
-                            _rating = rating;
+                            valor = widget.sintoma.dolorCabeza;
+                            rating = valor;
                           });
                         }),
                       ],
