@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/sintomas.dart';
 import 'infoPaciente.dart';
 import '../controllers/apiController.dart';
+import './SymptomsForm.dart';
 
 class SymptomsList extends StatefulWidget {
   final String idPaciente;
@@ -64,7 +65,7 @@ class _SymptomsListState extends State<SymptomsList> {
                       Navigator.push(
                         context, 
                         new CupertinoPageRoute(
-                          builder: (context) => InfoPaciente(snapshot.data[index])));
+                          builder: (context) => SymptomsForm(snapshot.data[index]))); //snapshot.data[index]
                     },
                   );
                 },

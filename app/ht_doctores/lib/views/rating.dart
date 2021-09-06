@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 class Rating extends StatefulWidget {
   final int valor;
   final int maxNum;
-  final Function(int) onNum;
 
-  Rating(this.valor, this.onNum, [this.maxNum = 5]);
+  Rating(this.valor, [this.maxNum = 5]);
 
   @override
   _Rating createState() => _Rating();

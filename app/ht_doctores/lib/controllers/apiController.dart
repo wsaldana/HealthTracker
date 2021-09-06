@@ -46,7 +46,6 @@ class ApiController {
       jsonData = json.decode(response.body);
       var listaSintomas = <Sintomas>[];
       for (var item in jsonData) {
-        print(item);
         Sintomas sintomas = new Sintomas(
           item["id_sintoma"], 
           item["id_usuario"], 
@@ -58,7 +57,6 @@ class ApiController {
           item["calambres"]
         );
         listaSintomas.add(sintomas);
-        print(sintomas);
       }
       return listaSintomas;
     } else {
