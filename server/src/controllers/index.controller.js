@@ -80,13 +80,13 @@ const getPacientesByMedico = async (req, res) => {
 
 const addRegistroSintomas = async (req, res) => {
     console.log(req.body)
-    const {dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres, presion, niveles_azucar, peso, fecha, id_usuario} = req.body;
-    const response = await pool.query("INSERT INTO sintomas VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, default)", [dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres, presion, niveles_azucar, peso, fecha, id_usuario]);
+    const {dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres, fecha, id_usuario} = req.body;
+    const response = await pool.query("INSERT INTO sintomas VALUES ($1, $2, $3, $4, $5, $6, $7, default)", [dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres, fecha, id_usuario]);
     res.json({
         statusCode: 200,
         message: 'Symptoms added',
         body: {
-            symptoms: {dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres, presion, niveles_azucar, peso, fecha, id_usuario}
+            symptoms: {dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres, fecha, id_usuario}
         }
     })
 }
