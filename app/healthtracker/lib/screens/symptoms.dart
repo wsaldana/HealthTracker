@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:healthtracker/screens/rating.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../controllers/apiController.dart';
 
 class Symptoms extends StatefulWidget {
   @override
@@ -8,25 +12,13 @@ class Symptoms extends StatefulWidget {
   }
 }
 
-class ListaSintomas {
-  String title;
-  bool value;
-
-  ListaSintomas({
-    this.title,
-    this.value = false,
-  });
-}
-
 class _SymptomsState extends State<Symptoms> {
-  int _rating;
-  final sintomas = [
-    ListaSintomas(title: 'Sangrados'),
-    ListaSintomas(title: 'Calambres'),
-    ListaSintomas(title: 'Diarrea'),
-    ListaSintomas(title: 'Molestia en espalda baja'),
-    ListaSintomas(title: 'Dolor de cabeza'),
-  ];
+  int _rating = 0;
+  int _sangrados = 0;
+  int _calambres = 0;
+  int _diarrea = 0;
+  int _espalda = 0;
+  int _cabeza = 0;
 
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Theme.of(context).accentColor,
@@ -85,11 +77,15 @@ class _SymptomsState extends State<Symptoms> {
                         SizedBox(
                           height: 25,
                         ),
-                        Rating((rating) {
-                          setState(() {
-                            _rating = rating;
-                          });
-                        }),
+                        Rating((value){
+                            _sangrados = value;
+                          },
+                          (rating) {
+                            setState(() {
+                              _rating = rating;
+                            });
+                          }
+                        ),
                         SizedBox(
                           height: 25,
                         ),
@@ -104,11 +100,15 @@ class _SymptomsState extends State<Symptoms> {
                         SizedBox(
                           height: 25,
                         ),
-                        Rating((rating) {
-                          setState(() {
-                            _rating = rating;
-                          });
-                        }),
+                        Rating((value){
+                            _calambres = value;
+                          },
+                          (rating) {
+                            setState(() {
+                              _rating = rating;
+                            });
+                          }
+                        ),
                         SizedBox(
                           height: 25,
                         ),
@@ -123,11 +123,15 @@ class _SymptomsState extends State<Symptoms> {
                         SizedBox(
                           height: 25,
                         ),
-                        Rating((rating) {
-                          setState(() {
-                            _rating = rating;
-                          });
-                        }),
+                        Rating((value){
+                            _diarrea = value;
+                          },
+                          (rating) {
+                            setState(() {
+                              _rating = rating;
+                            });
+                          }
+                        ),
                         SizedBox(
                           height: 25,
                         ),
@@ -142,11 +146,15 @@ class _SymptomsState extends State<Symptoms> {
                         SizedBox(
                           height: 25,
                         ),
-                        Rating((rating) {
-                          setState(() {
-                            _rating = rating;
-                          });
-                        }),
+                        Rating((value){
+                            _espalda = value;
+                          },
+                          (rating) {
+                            setState(() {
+                              _rating = rating;
+                            });
+                          }
+                        ),
                         SizedBox(
                           height: 25,
                         ),
@@ -161,11 +169,15 @@ class _SymptomsState extends State<Symptoms> {
                         SizedBox(
                           height: 25,
                         ),
-                        Rating((rating) {
-                          setState(() {
-                            _rating = rating;
-                          });
-                        }),
+                        Rating((value){
+                            _cabeza = value;
+                          },
+                          (rating) {
+                            setState(() {
+                              _rating = rating;
+                            });
+                          }
+                        ),
                       ],
                     ))
 
@@ -207,7 +219,12 @@ class _SymptomsState extends State<Symptoms> {
                         child: Column(
                       children: [
                         ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              ApiController controller = new ApiController();
+                              SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                              int idUsuario = json.decode(sharedPreferences.getString('userData'))["id_usuario"];
+                              controller.registrarSintomas(_cabeza, _espalda, _diarrea, _sangrados, _calambres, idUsuario);
+                            },
                             child: Text("Registrar",
                                 style: TextStyle(
                                     fontFamily: 'Poppins',
@@ -249,23 +266,5 @@ class _SymptomsState extends State<Symptoms> {
         //                   )
         //   ],
         //   ),
-      );
-
-// //lista de sintomas individualmente
-  Widget sympList2(ListaSintomas lista) => symplist(
-        lista: lista,
-      );
-
-//prueba inicial de sintomas
-  Widget symplist({
-    ListaSintomas lista,
-  }) =>
-      ListTile(
-        title: Text(lista.title,
-            style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 22.0,
-                fontWeight: FontWeight.w600,
-                color: Colors.black)),
       );
 }

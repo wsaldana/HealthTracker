@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Rating extends StatefulWidget {
+  final Function(int) updateValue;
   final int maxNum;
   final Function(int) onNum;
 
-  Rating(this.onNum, [this.maxNum = 5]);
+  Rating(this.updateValue, this.onNum, [this.maxNum = 5]);
 
   @override
   _Rating createState() => _Rating();
@@ -30,7 +31,7 @@ class _Rating extends State<Rating> {
             _current = index + 1;
           });
           print(index);
-
+          this.widget.updateValue(_current);
           this.widget.onNum(_current);
         },
       );
