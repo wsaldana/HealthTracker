@@ -1,6 +1,7 @@
 class Paciente {
 
   //user profile
+  String _id;
   String _nombre;
   String _correo;
   String _telefono;
@@ -14,7 +15,8 @@ class Paciente {
   String _foto;
 
   //Constructor
-  Paciente(String nombre, String correo, String telefono, String tipoDeSangre, String padecimeintos, String cirugias, String enfermedadesHereditarias, String estado, String foto){
+  Paciente(String id, String nombre, String correo, String telefono, String tipoDeSangre, String padecimeintos, String cirugias, String enfermedadesHereditarias, String estado, String foto){
+    this._id = id;
     this._nombre = nombre;
     this._correo = correo;
     this._telefono = telefono;
@@ -27,6 +29,9 @@ class Paciente {
   }
 
   //Setters y Getters
+  get id => this._id;
+  set id( value) => this._id = value;
+
   get nombre => this._nombre;
   set nombre( value) => this._nombre = value;
 
