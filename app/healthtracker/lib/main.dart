@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'screens/login.dart';
-
-import 'screens/symptoms.dart';
+import 'screens/login.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,8 +32,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      // home: Login(),
-      home: Symptoms(),
+      home: Login(),
     );
   }
 }
