@@ -20,9 +20,9 @@ class _HomeState extends State<Home> {
               Navigator.push(
                   context, 
                   new CupertinoPageRoute(
-                    builder: (context) => Symptoms())); //paciente.idUsuario
+                    builder: (context) => Symptoms()));
             }, 
-            child: Text("Análisis"),
+            child: Text("Sintomas"),
             style: ElevatedButton.styleFrom(
               elevation: 8,
               shape: RoundedRectangleBorder(

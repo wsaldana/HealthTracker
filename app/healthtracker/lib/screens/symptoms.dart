@@ -1,9 +1,10 @@
 import 'dart:convert';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:healthtracker/screens/rating.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../controllers/apiController.dart';
+import './home.dart';
 
 class Symptoms extends StatefulWidget {
   @override
@@ -223,7 +224,15 @@ class _SymptomsState extends State<Symptoms> {
                               ApiController controller = new ApiController();
                               SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
                               int idUsuario = json.decode(sharedPreferences.getString('userData'))["id_usuario"];
-                              controller.registrarSintomas(_cabeza, _espalda, _diarrea, _sangrados, _calambres, idUsuario);
+                              bool added = await controller.registrarSintomas(_cabeza, _espalda, _diarrea, _sangrados, _calambres, idUsuario);
+                              if(added){
+                                Navigator.push(
+                                  context, 
+                                  new CupertinoPageRoute(
+                                    builder: (context) => Home()));
+                              }else{
+                                print("No se pudo guardar el registro");
+                              }
                             },
                             child: Text("Registrar",
                                 style: TextStyle(

@@ -30,12 +30,10 @@ class _LoginState extends State<Login> {
 
     if (response.statusCode == 200) {
       jsonData = json.decode(response.body);
-      print(jsonData['statusCode']);
       if (jsonData['statusCode'] == 200) {
-        print(jsonData);
         setState(() {
           isLoading = false;
-          sharedPreferences.setString("userData", jsonData['body'].toString());
+          sharedPreferences.setString("userData", json.encode(jsonData['body']));
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (BuildContext context) => Home()),
               (Route<dynamic> route) => false);
