@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/login.dart';
-import 'screens/login.dart';
+import 'screens/stats.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: Login(),
+      home: Stats(),
     );
   }
 }
