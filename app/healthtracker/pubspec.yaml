@@ -25,6 +25,8 @@ dependencies:
   shared_preferences: any
   flutter:
     sdk: flutter
+  syncfusion_flutter_charts: ^18.4.49
+  draw_graph: ^1.0.0
     
 
 

@@ -1,150 +1,93 @@
+import 'package:draw_graph/draw_graph.dart';
+import 'package:draw_graph/models/feature.dart';
 import 'package:flutter/material.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
-
-import 'package:intl/intl.dart';
 
 class Stats extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return _StatsState();
-  }
-}
-
-class Datos {
-  int sangrados;
-  int calambres;
-  int diarrea;
-  int espalda;
-  int cabeza;
-  // DateTime fecha;
-  String fecha;
-  charts.Color colorVal;
-  Datos(
-      {this.cabeza,
-      this.calambres,
-      this.diarrea,
-      this.espalda,
-      this.sangrados,
-      this.fecha,
-      this.colorVal});
-}
-
-class Chart extends StatelessWidget {
-  final List<Datos> datos;
-  Chart({this.datos});
-  @override
-  Widget build(BuildContext context) {
-    List<charts.Series<Datos, String>> series = [
-      charts.Series(
-          // DateFormat("yyyy-MM-dd").format(DateTime.now()
-          id: "cabeza",
-          data: datos,
-          domainFn: (Datos datos, _) => datos.fecha.toString(), // eje x
-          measureFn: (Datos datos, _) => datos.cabeza,
-          labelAccessorFn: (Datos row, _) => "${row.fecha}",
-          colorFn: (Datos datos, _) => datos.colorVal),
-      charts.Series(
-          // DateFormat("yyyy-MM-dd").format(DateTime.now()
-          id: "espalda",
-          data: datos,
-          domainFn: (Datos datos, _) => datos.fecha.toString(), // eje x
-          measureFn: (Datos datos, _) => datos.espalda,
-          labelAccessorFn: (Datos row, _) => "${row.fecha}",
-          colorFn: (Datos datos, _) => datos.colorVal),
-      charts.Series(
-          // DateFormat("yyyy-MM-dd").format(DateTime.now()
-          id: "sangrado",
-          data: datos,
-          domainFn: (Datos datos, _) => datos.fecha.toString(), // eje x
-          measureFn: (Datos datos, _) => datos.sangrados,
-          labelAccessorFn: (Datos row, _) => "${row.sangrados}",
-          colorFn: (Datos datos, _) => datos.colorVal),
-      charts.Series(
-          // DateFormat("yyyy-MM-dd").format(DateTime.now()
-          id: "diarrea",
-          data: datos,
-          domainFn: (Datos datos, _) => datos.fecha.toString(), // eje x
-          measureFn: (Datos datos, _) => datos.diarrea,
-          labelAccessorFn: (Datos row, _) => "${row.diarrea}",
-          colorFn: (Datos datos, _) => datos.colorVal),
-      charts.Series(
-          // DateFormat("yyyy-MM-dd").format(DateTime.now()
-          id: "calambres",
-          data: datos,
-          domainFn: (Datos datos, _) => datos.fecha.toString(), // eje x
-          measureFn: (Datos datos, _) => datos.calambres,
-          labelAccessorFn: (Datos row, _) => "${row.calambres}",
-          colorFn: (Datos datos, _) => datos.colorVal),
-    ];
-
-    return Container(
-      height: 300,
-      padding: EdgeInsets.all(25),
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(9.0),
-          child: Column(
-            children: <Widget>[
-              Text(
-                "Estadísticas de síntomas",
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-              Expanded(
-                child: charts.BarChart(series, animate: true),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  _StatsState createState() => _StatsState();
 }
 
 class _StatsState extends State<Stats> {
-  final List<Datos> datos = [
-    Datos(
-        cabeza: 3,
-        calambres: 4,
-        diarrea: 5,
-        espalda: 2,
-        sangrados: 1,
-        // fecha: DateFormat("yyyy-MM-dd").parse("2021-07-20"),
-        fecha: "2021-07-20",
-        colorVal: charts.ColorUtil.fromDartColor(Colors.green)),
-    Datos(
-        cabeza: 2,
-        calambres: 1,
-        diarrea: 1,
-        espalda: 2,
-        sangrados: 3,
-        // fecha: DateFormat("yyyy-MM-dd").parse("2021-08-12"),
-        fecha: "2021-08-12",
-        colorVal: charts.ColorUtil.fromDartColor(Colors.orange)),
-    Datos(
-        cabeza: 3,
-        calambres: 2,
-        diarrea: 4,
-        espalda: 5,
-        sangrados: 1,
-        // fecha: DateFormat("yyyy-MM-dd").parse("2021-08-23"),
-        fecha: "2021-08-23",
-        colorVal: charts.ColorUtil.fromDartColor(Colors.red)),
-    Datos(
-        cabeza: 3,
-        calambres: 5,
-        diarrea: 5,
-        espalda: 5,
-        sangrados: 2,
-        // fecha: DateFormat("yyyy-MM-dd").parse("2021-09-15"),
-        fecha: "2021-09-15",
-        colorVal: charts.ColorUtil.fromDartColor(Colors.blue))
+  final List<Feature> features = [
+    Feature(
+      title: "Dolor de cabeza",
+      color: Colors.pink,
+      data: [1, 0.7, 0.5, 0.8],
+    ),
+    Feature(
+      title: "Sangrados",
+      color: Colors.blue,
+      data: [0.5, 0.3, 0.7, 1],
+    ),
+    Feature(
+      title: "Calambres",
+      color: Colors.green,
+      data: [0.8, 0.1, 1, 0.6],
+    ),
+    Feature(
+      title: "Diarrea",
+      color: Colors.purple,
+      data: [0.4, 0.6, 0.2, 0.8],
+    ),
+    Feature(
+      title: "Dolor de espalda",
+      color: Colors.yellow,
+      data: [0.1, 1, 0.3, 0.4],
+    ),
   ];
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: Chart(
-        datos: datos,
-      )),
+      backgroundColor: Theme.of(context).accentColor,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                margin: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Theme.of(context).primaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Theme.of(context).hintColor.withOpacity(0.2),
+                          offset: Offset(0, 10),
+                          blurRadius: 20)
+                    ]),
+                child: Form(
+                  child: Column(
+                    children: [
+                      Text(
+                        "Estadísticas de síntomas",
+                        style: Theme.of(context).textTheme.headline2,
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      LineGraph(
+                        features: features,
+                        size: Size(400, 450),
+                        labelX: ["07-20", "08-12", "08-23", "09-15"],
+                        labelY: ["1", "2", "3", "4", "5"],
+                        showDescription: true,
+                        graphColor: Colors.blue,
+                        graphOpacity: 0.06,
+                        verticalFeatureDirection: true,
+                        descriptionHeight: 180,
+                      ),
+                      SizedBox(
+                        height: 30,
+                      )
+                    ],
+                  ),
+                )),
+          ],
+        ),
+      ),
     );
   }
 }
