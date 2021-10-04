@@ -107,6 +107,32 @@ const getRegistroSintomas = async (req, res) => {
     res.json(response.rows);
 }
 
+const getResumenSintomasDolorDeCabeza = async (req, res) => {
+    const response = await pool.query("Select  dolor_cabeza, fecha from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
+    res.json(response.rows);
+}
+
+const getResumenSintomaMolestiaEspaladaBaja = async (req, res) => {
+    const response = await pool.query("Select  molestia_espalda_baja, fecha from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
+    res.json(response.rows);
+}
+
+const getResumenSintomaDiarrea = async (req, res) => {
+    const response = await pool.query("Select  diarrea, fecha from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
+    res.json(response.rows);
+}
+
+const getResumenSintomaSangrados = async (req, res) => {
+    const response = await pool.query("Select  sangrados, fecha from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
+    res.json(response.rows);
+}
+
+const getResumenSintomaCalambres = async (req, res) => {
+    const response = await pool.query("Select  calambres, fecha from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
+    res.json(response.rows);
+}
+
+
 module.exports = { 
     login,
     getUsuarios,
@@ -119,5 +145,10 @@ module.exports = {
     getPacientesByMedico,
     addRegistroSintomas,
     getListRegistrosSintomas,
-    getRegistroSintomas
+    getRegistroSintomas,
+    getResumenSintomasDolorDeCabeza,
+    getResumenSintomaMolestiaEspaladaBaja,
+    getResumenSintomaDiarrea,
+    getResumenSintomaSangrados,
+    getResumenSintomaCalambres,
 }
