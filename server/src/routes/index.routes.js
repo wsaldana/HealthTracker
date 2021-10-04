@@ -4,7 +4,9 @@ const router = Router();
 const { login, 
     getUsuarios, getUsuario, getUsuarioByNombre, addUsuario, getPacientesByMedico,
     getHistoriales, getHistorialById, addHistorial,  
-    addRegistroSintomas, getListRegistrosSintomas, getRegistroSintomas, getResumenSintomasDolorDeCabeza, getResumenSintomaMolestiaEspaladaBaja, getResumenSintomaDiarrea, getResumenSintomaSangrados, getResumenSintomaCalambres } = require('../controllers/index.controller');
+    addRegistroSintomas, getListRegistrosSintomas, getRegistroSintomas, 
+    getResumenSintomasDolorDeCabeza, getResumenSintomaMolestiaEspaladaBaja, getResumenSintomaDiarrea, getResumenSintomaSangrados, getResumenSintomaCalambres 
+} = require('../controllers/index.controller');
 
 router.get('/login', login);
 
@@ -22,10 +24,10 @@ router.get('/listaSintomas/:id_usuario', getListRegistrosSintomas)
 router.get('/sintomas', getRegistroSintomas)
 router.post('/sintomas', addRegistroSintomas)
 
-router.get('/sintomas/DolorCabezaResumen', getResumenSintomasDolorDeCabeza)
-router.get('/sintomas/MolestiaEspaldaBajaResumen', getResumenSintomaMolestiaEspaladaBaja)
-router.get('/sintomas/DiarreaResumen', getResumenSintomaDiarrea)
-router.get('/sintomas/SangradosResumen', getResumenSintomaSangrados)
-router.get('/sintomas/SangradosResumen', getResumenSintomaCalambres)
+router.get('/sintomas/DolorCabezaResumen/:id_usuario', getResumenSintomasDolorDeCabeza)
+router.get('/sintomas/MolestiaEspaldaBajaResumen/:id_usuario', getResumenSintomaMolestiaEspaladaBaja)
+router.get('/sintomas/DiarreaResumen/:id_usuario', getResumenSintomaDiarrea)
+router.get('/sintomas/SangradosResumen/:id_usuario', getResumenSintomaSangrados)
+router.get('/sintomas/SangradosResumen/:id_usuario', getResumenSintomaCalambres)
 
 module.exports = router;
