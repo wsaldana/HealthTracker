@@ -132,6 +132,11 @@ const getResumenSintomaCalambres = async (req, res) => {
     res.json(response.rows);
 }
 
+const getResumen = async (req, res) => {
+    const response = await pool.query("Select  fecha, dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
+    res.json(response.rows);
+}
+
 
 module.exports = { 
     login,
@@ -151,4 +156,5 @@ module.exports = {
     getResumenSintomaDiarrea,
     getResumenSintomaSangrados,
     getResumenSintomaCalambres,
+    getResumen
 }
