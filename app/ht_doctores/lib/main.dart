@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'views/home.dart';
+//import 'views/home.dart';
+import 'views/stats.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,12 +13,12 @@ class MyApp extends StatelessWidget {
       title: 'Health Tracker',
       theme: ThemeData(
         fontFamily: 'Poppins',
-        primaryColor: Colors.blue,
+        primaryColor: Colors.white, //blue
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           elevation: 0,
-          foregroundColor: Colors.blue,
+          foregroundColor: Colors.blue, //white
         ),
-        accentColor: Colors.white,
+        accentColor: Colors.blue,
         textTheme: TextTheme(
           headline1: TextStyle(
             fontSize: 24.0,
@@ -41,8 +42,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: Home(),
+      home: Stats(),
     );
   }
 }
-
