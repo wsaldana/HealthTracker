@@ -80,14 +80,14 @@ class ApiController {
     List<String> espalda = [];
 
     for (var i = 0; i < jsonData.length; i++) {
-      labels.add(jsonData[i]["fecha"].toString());
+      labels.add(jsonData[i]["fecha"].toString().substring(5, 10).replaceAll("-", "/"));
       cabeza.add(jsonData[i]["dolor_cabeza"].toString());
       sangrados.add(jsonData[i]["sangrados"].toString());
       calambres.add(jsonData[i]["calambres"].toString());
       diarrea.add(jsonData[i]["diarrea"].toString());
       espalda.add(jsonData[i]["molestia_espalda_baja"].toString());
     }
-    
+    print(labels);
     return ({
       "labels": labels,
       "cabeza": cabeza,

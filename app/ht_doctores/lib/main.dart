@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'views/home.dart';
+import 'views/home.dart';
 import 'views/stats.dart';
 
 void main() {
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: Stats(),
+      home: Home(),
     );
   }
 }

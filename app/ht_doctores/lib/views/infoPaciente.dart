@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../models/paciente.dart';
 import './symptomsList.dart';
+import './stats.dart';
 
 class InfoPaciente extends StatelessWidget {
   final Paciente paciente;
@@ -127,6 +128,26 @@ class InfoPaciente extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                             vertical: 15, horizontal: 50))),
               ),
+              SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          new CupertinoPageRoute(
+                              builder: (context) =>
+                                  Stats('1'))); //paciente.idUsuario
+                    },
+                    child: Text("Resumen"),
+                    style: ElevatedButton.styleFrom(
+                        elevation: 8,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6)),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 50))),
+              )
             ],
           ),
         ),

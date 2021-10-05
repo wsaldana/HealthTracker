@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import '../controllers/apiController.dart';
 
 class Stats extends StatefulWidget {
+  final String idPaciente;
+  Stats(this.idPaciente);
+
   @override
   _StatsState createState() => _StatsState();
 }
@@ -13,8 +16,6 @@ class _StatsState extends State<Stats> {
   Future<Map<String, List<String>>> requestFeatures(id) async {
     ApiController apiController = new ApiController();
     var data = await apiController.getResumen(id);
-    print("ajaaaaa");
-    print(data);
     return data;
   }
 
@@ -80,7 +81,7 @@ class _StatsState extends State<Stats> {
                         height: 50,
                       ),
                       FutureBuilder<Map<String, List<String>>>(
-                        future: requestFeatures("1"), 
+                        future: requestFeatures(widget.idPaciente), 
                         builder: (BuildContext context, AsyncSnapshot<Map<String, List<String>>> snapshot){
                           if (snapshot.connectionState == ConnectionState.waiting) {
                             return CircularProgressIndicator();
@@ -162,9 +163,44 @@ class _StatsState extends State<Stats> {
                                 descriptionHeight: 180,
                               );
                             }
-                            
                           }else{
-                            return null;
+                            return LineGraph(
+                                features: [
+                                  Feature(
+                                    title: "Dolor de cabeza",
+                                    color: Colors.pink,
+                                    data: [],
+                                  ),
+                                  Feature(
+                                    title: "Sangrados",
+                                    color: Colors.blue,
+                                    data: [],
+                                  ),
+                                  Feature(
+                                    title: "Calambres",
+                                    color: Colors.green,
+                                    data: [],
+                                  ),
+                                  Feature(
+                                    title: "Diarrea",
+                                    color: Colors.purple,
+                                    data: [],
+                                  ),
+                                  Feature(
+                                    title: "Dolor de espalda",
+                                    color: Colors.yellow,
+                                    data: [],
+                                  )
+                                ],
+                                size: Size(400, 450),
+                                labelX: [],
+                                labelY: ["1", "2", "3", "4", "5"],
+                                showDescription: true,
+                                graphColor: Colors.blue,
+                                graphOpacity: 0.06,
+                                verticalFeatureDirection: true,
+                                descriptionHeight: 180,
+                              );
                           }
                         }
                       ),
