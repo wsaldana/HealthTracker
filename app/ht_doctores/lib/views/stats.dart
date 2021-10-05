@@ -12,7 +12,6 @@ class _StatsState extends State<Stats> {
 
   Future<Map<String, List<String>>> requestFeatures(id) async {
     ApiController apiController = new ApiController();
-    print("por aca");
     var data = await apiController.getResumen(id);
     print("ajaaaaa");
     print(data);
@@ -87,33 +86,32 @@ class _StatsState extends State<Stats> {
                             return CircularProgressIndicator();
                           }else if(snapshot.connectionState == ConnectionState.done){
                             if(snapshot.hasData){
-
                               return LineGraph(
                                 features: [
                                   Feature(
                                     title: "Dolor de cabeza",
                                     color: Colors.pink,
-                                    data: snapshot.data["cabeza"].map((e) => double.parse(e)).toList(),
+                                    data: snapshot.data["cabeza"].map((e) => double.parse(e)/5).toList(),
                                   ),
                                   Feature(
                                     title: "Sangrados",
                                     color: Colors.blue,
-                                    data: snapshot.data["sangrados"].map((e) => double.parse(e)).toList(),
+                                    data: snapshot.data["sangrados"].map((e) => double.parse(e)/5).toList(),
                                   ),
                                   Feature(
                                     title: "Calambres",
                                     color: Colors.green,
-                                    data: snapshot.data["calambres"].map((e) => double.parse(e)).toList(),
+                                    data: snapshot.data["calambres"].map((e) => double.parse(e)/5).toList(),
                                   ),
                                   Feature(
                                     title: "Diarrea",
                                     color: Colors.purple,
-                                    data: snapshot.data["diarrea"].map((e) => double.parse(e)).toList(),
+                                    data: snapshot.data["diarrea"].map((e) => double.parse(e)/5).toList(),
                                   ),
                                   Feature(
                                     title: "Dolor de espalda",
                                     color: Colors.yellow,
-                                    data: snapshot.data["espalda"].map((e) => double.parse(e)).toList(),
+                                    data: snapshot.data["espalda"].map((e) => double.parse(e)/5).toList(),
                                   )
                                 ],
                                 size: Size(400, 450),
