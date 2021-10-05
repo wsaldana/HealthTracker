@@ -39,6 +39,25 @@ class _StatsState extends State<Stats> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+            backgroundColor: Theme.of(context).accentColor,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                margin: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Theme.of(context).primaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Theme.of(context).hintColor.withOpacity(0.2),
+                          offset: Offset(0, 10),
+                          blurRadius: 20)
+                    ]),
                 child: Form(
                   child: Column(
                     children: [
