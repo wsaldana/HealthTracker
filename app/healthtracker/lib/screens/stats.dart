@@ -71,6 +71,8 @@ class _StatsState extends State<Stats> {
                       LineGraph(
                         features: features,
                         size: Size(400, 450),
+                        labelX: ["07-20", "08-12", "08-23", "09-15"],
+                        labelY: ["1", "2", "3", "4", "5"],
                         showDescription: true,
                         graphColor: Colors.blue,
                         graphOpacity: 0.06,
