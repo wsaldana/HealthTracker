@@ -20,8 +20,10 @@ class _Register2State extends State<Register2> {
   TextEditingController enfermedadesHereditariasController =
       new TextEditingController();
 
-  registerApi(String sangre, String padecimientos, String cirugias, String enfermedades) async {
-    var uri = Uri.parse('https://health-tracker-api-uvg.herokuapp.com/historial');
+  registerApi(String sangre, String padecimientos, String cirugias,
+      String enfermedades) async {
+    var uri =
+        Uri.parse('https://health-tracker-api-uvg.herokuapp.com/historial');
     var jsonData;
 
     Map<String, String> data = {
@@ -41,7 +43,8 @@ class _Register2State extends State<Register2> {
         print(jsonData);
         setState(() {
           isLoading = false;
-          sharedPreferences.setString("userMedicalHistory", jsonData['body'].toString());
+          sharedPreferences.setString(
+              "userMedicalHistory", jsonData['body'].toString());
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (BuildContext context) => Home()),
               (Route<dynamic> route) => false);
@@ -55,6 +58,7 @@ class _Register2State extends State<Register2> {
   }
 
   @override
+  // se agrega el trimestre
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -152,6 +156,20 @@ class _Register2State extends State<Register2> {
                                           color:
                                               Theme.of(context).accentColor)),
                                   prefixIcon: Icon(Icons.person_add_alt_1,
+                                      color: Theme.of(context).accentColor))),
+                          new TextFormField(
+                              decoration: new InputDecoration(
+                                  hintText: "Trimestre",
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Theme.of(context)
+                                              .accentColor
+                                              .withOpacity(0.2))),
+                                  focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color:
+                                              Theme.of(context).accentColor)),
+                                  prefixIcon: Icon(Icons.date_range_outlined,
                                       color: Theme.of(context).accentColor))),
                           SizedBox(
                             height: 40,
