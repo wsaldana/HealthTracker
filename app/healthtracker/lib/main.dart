@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/login.dart';
+import 'screens/register2.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: Login(),
+      home: Register2(),
     );
   }
 }

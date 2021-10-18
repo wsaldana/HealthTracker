@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
 
-
 class Rating extends StatefulWidget {
-
   final Function(int) updateValue;
   final int maxNum;
   final Function(int) onNum;
 
-
-  Rating(this.updateValue,this.onNum,[this.maxNum = 5]);
+  Rating(this.updateValue, this.onNum, [this.maxNum = 5]);
 
   @override
   _Rating createState() => _Rating();
-
 }
 
 class _Rating extends State<Rating> {
-
   methodToBeTested() {
     if (widget.maxNum == 5) return 0;
     return 1;
@@ -24,12 +19,11 @@ class _Rating extends State<Rating> {
 
   int _current = 0;
 
-
   Widget _buildRating(int index) {
     if (index < _current) {
       return Icon(Icons.circle, color: Theme.of(context).accentColor);
     } else {
-      return Icon(Icons.circle);
+      return Icon(Icons.circle_outlined);
     }
   }
 
