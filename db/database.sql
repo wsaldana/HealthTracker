@@ -180,3 +180,50 @@ id_usuario = 11;
 
 ALTER TABLE usuarios
 ADD UNIQUE (correo);
+
+select dolor_cabeza, fecha from sintomas
+where id_usuario =
+
+
+select * from historial_medico hm 
+
+
+
+select * from sintomas s 
+
+alter table sintomas 
+add column trimestre int 
+
+ALTER TABLE sintomas 
+ADD CONSTRAINT rango_trimestre 
+CHECK (
+	trimestre >= 1 and trimestre <=4
+);
+
+update sintomas 
+set trimestre = 2
+where id_sintoma = '7' or 
+id_sintoma ='8'
+
+update sintomas 
+set trimestre = 3
+where id_sintoma = '9'
+or 
+id_sintoma ='12'
+or 
+id_sintoma ='13'
+or 
+id_sintoma ='14'
+or 
+id_sintoma ='10'
+
+select * from historial_medico hm 
+
+alter table historial_medico 
+add column trimestre int 
+
+ALTER TABLE historial_medico 
+ADD CONSTRAINT rango_trimestre 
+CHECK (
+	trimestre >= 1 and trimestre <=4
+);
