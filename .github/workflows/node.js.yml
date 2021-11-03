@@ -15,7 +15,7 @@ jobs:
     runs-on: windows-latest
     defaults:
       run:
-        working-directory: server
+        working-directory: HealthTracker/server
 
     strategy:
       matrix:
@@ -29,7 +29,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-          cache-dependency-path: server/package-lock.json
+          cache-dependency-path: HealthTracker/server/package-lock.json
 
       - run: npm install
       - run: npm start
