@@ -63,7 +63,7 @@ const getHistorialById = async(req, res) => {
 
 const addHistorial = async (req, res) => {
     const {tipo_de_sangre, padecimientos, cirugias, enfermedades_hereditarias} = req.body;
-    const response = await pool.query("INSERT INTO historial_medico VALUES (default, $1, $2, $3, $4, $5)", [tipo_de_sangre, padecimientos, cirugias, enfermedades_hereditarias]);
+    const response = await pool.query("INSERT INTO historial_medico VALUES (default, $1, $2, $3, $4)", [tipo_de_sangre, padecimientos, cirugias, enfermedades_hereditarias]);
     res.json({
         statusCode: 200,
         message: 'Historial agregado',
