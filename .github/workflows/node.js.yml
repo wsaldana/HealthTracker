@@ -29,4 +29,4 @@ jobs:
           cache-dependency-path: server/package-lock.json
 
       - run: npm install
-      - run: npm start
+      - run: npm start & npx wait-on http://localhost:3000/
