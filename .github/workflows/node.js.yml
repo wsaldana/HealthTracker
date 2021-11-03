@@ -2,9 +2,9 @@ name: HealthTrackerPipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build:
@@ -12,7 +12,7 @@ jobs:
     runs-on: windows-latest
     defaults:
       run:
-        working-directory: HealthTracker/server
+        working-directory: server
 
     strategy:
       matrix:
@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-          cache-dependency-path: HealthTracker/server/package-lock.json
+          cache-dependency-path: server/package-lock.json
 
       - run: npm install
       - run: npm start
