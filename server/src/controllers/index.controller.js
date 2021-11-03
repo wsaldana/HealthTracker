@@ -63,7 +63,7 @@ const getHistorialById = async(req, res) => {
 
 const addHistorial = async (req, res) => {
     const {tipo_de_sangre, padecimientos, cirugias, enfermedades_hereditarias} = req.body;
-    const response = await pool.query("INSERT INTO historial_medico VALUES (default, $1, $2, $3, $4)", [tipo_de_sangre, padecimientos, cirugias, enfermedades_hereditarias]);
+    const response = await pool.query("INSERT INTO historial_medico VALUES (default, $1, $2, $3, $4, $5)", [tipo_de_sangre, padecimientos, cirugias, enfermedades_hereditarias]);
     res.json({
         statusCode: 200,
         message: 'Historial agregado',
@@ -80,13 +80,13 @@ const getPacientesByMedico = async (req, res) => {
 
 const addRegistroSintomas = async (req, res) => {
     console.log(req.body)
-    const {dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres, fecha, id_usuario} = req.body;
-    const response = await pool.query("INSERT INTO sintomas VALUES ($1, $2, $3, $4, $5, $6, $7, default)", [dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres, fecha, id_usuario]);
+    const {dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres, fecha, trimestre ,id_usuario} = req.body;
+    const response = await pool.query("INSERT INTO sintomas VALUES ($1, $2, $3, $4, $5, $6, $7, $8 default)", [dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres, fecha, id_usuario, trimestre]);
     res.json({
         statusCode: 200,
         message: 'Symptoms added',
         body: {
-            symptoms: {dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres, fecha, id_usuario}
+            symptoms: {dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres, fecha, id_usuario, trimestre}
         }
     })
 }
@@ -108,32 +108,37 @@ const getRegistroSintomas = async (req, res) => {
 }
 
 const getResumenSintomasDolorDeCabeza = async (req, res) => {
-    const response = await pool.query("Select  dolor_cabeza, fecha from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
+    const response = await pool.query("Select  dolor_cabeza, fecha, trimestre from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
     res.json(response.rows);
 }
 
 const getResumenSintomaMolestiaEspaladaBaja = async (req, res) => {
-    const response = await pool.query("Select  molestia_espalda_baja, fecha from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
+    const response = await pool.query("Select  molestia_espalda_baja, fecha, trimestre from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
     res.json(response.rows);
 }
 
 const getResumenSintomaDiarrea = async (req, res) => {
-    const response = await pool.query("Select  diarrea, fecha from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
+    const response = await pool.query("Select  diarrea, fecha, trimestre from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
     res.json(response.rows);
 }
 
 const getResumenSintomaSangrados = async (req, res) => {
-    const response = await pool.query("Select  sangrados, fecha from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
+    const response = await pool.query("Select  sangrados, fecha, trimestre from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
     res.json(response.rows);
 }
 
 const getResumenSintomaCalambres = async (req, res) => {
-    const response = await pool.query("Select  calambres, fecha from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
+    const response = await pool.query("Select  calambres, fecha, trimestre from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
     res.json(response.rows);
 }
 
 const getResumen = async (req, res) => {
-    const response = await pool.query("Select  fecha, dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
+    const response = await pool.query("Select  fecha, dolor_cabeza, molestia_espalda_baja, diarrea, sangrados, calambres, trimestre from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
+    res.json(response.rows);
+}
+
+const getTrimestre = async (req, res) => {
+    const response = await pool.query("Select trimestre, from sintomas where id_usuario=$1 ", [req.params.id_usuario]);
     res.json(response.rows);
 }
 
@@ -156,5 +161,6 @@ module.exports = {
     getResumenSintomaDiarrea,
     getResumenSintomaSangrados,
     getResumenSintomaCalambres,
-    getResumen
+    getResumen,
+    getTrimestre
 }
