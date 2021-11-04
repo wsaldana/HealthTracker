@@ -97,4 +97,37 @@ class ApiController {
       "espalda": espalda 
     });
   }
+  
+  
+  Future<Map<String, List<String>>> getResumenTrimestre(String idPaciente) async {
+    var uri = Uri.parse(apiUrl+'/sintomas/resumen/'+idPaciente);
+    var jsonData;
+    final response = await http.get(uri);
+    jsonData = json.decode(response.body);
+
+    List<String> labels = [];
+    List<String> cabeza = [];
+    List<String> sangrados = [];
+    List<String> calambres = [];
+    List<String> diarrea = [];
+    List<String> espalda = [];
+
+    for (var i = 0; i < jsonData.length; i++) {
+      labels.add(jsonData[i]["trimestre"].toString().substring(5, 10).replaceAll("-", "/"));
+      cabeza.add(jsonData[i]["dolor_cabeza"].toString());
+      sangrados.add(jsonData[i]["sangrados"].toString());
+      calambres.add(jsonData[i]["calambres"].toString());
+      diarrea.add(jsonData[i]["diarrea"].toString());
+      espalda.add(jsonData[i]["molestia_espalda_baja"].toString());
+    }
+    print(labels);
+    return ({
+      "labels": labels,
+      "cabeza": cabeza,
+      "sangrados": sangrados,
+      "calambres": calambres,
+      "diarrea": diarrea,
+      "espalda": espalda 
+    });
+  }
 }
