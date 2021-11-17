@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
-
+import './doctor.dart';
 class Register_doctor extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return _Register_doctorState();
   }
 }
+
+List<Doctor> doctor = [
+  Doctor(nombre: 'Médico no.1'),
+  Doctor(nombre: 'Médico no.2'),
+  Doctor(nombre: 'Médico no.3'),
+];
+
 
 class _Register_doctorState extends State<Register_doctor> {
   Widget build(BuildContext context) => Scaffold(
@@ -32,56 +39,12 @@ class _Register_doctorState extends State<Register_doctor> {
                         child: Column(
                       children: [
                         Text(
-                          "Historial de síntomas",
+                          "Seleccioné a su médico",
                           style: Theme.of(context).textTheme.headline2,
                         ),
                       ],
                     ))),
-                Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(vertical: 25, horizontal: 0),
-                    margin: EdgeInsets.symmetric(vertical: 150, horizontal: 20),
-                    child: Form(
-                        child: Column(
-                      children: [
-                        ElevatedButton(
-                            onPressed: () {},
-                            child: Text("Síntomas mm/dd/yyyy",
-                                style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black)),
-                            style: ElevatedButton.styleFrom(
-                                elevation: 8,
-                                primary: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(6)),
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 15, horizontal: 75))),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        ElevatedButton(
-                            onPressed: () {},
-                            child: Text("Síntomas mm/dd/yyyy",
-                                style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black)),
-                            style: ElevatedButton.styleFrom(
-                                elevation: 8,
-                                primary: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(6)),
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 15, horizontal: 75))),
-                        SizedBox(
-                          height: 25,
-                        ),
-                      ],
-                    ))),
+
               ])
             ],
           ),
