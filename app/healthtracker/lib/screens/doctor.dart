@@ -2,6 +2,7 @@
 class Doctor {
 
   String nombre;
+  String image;
 
-  Doctor({ this.nombre });
+  Doctor({ this.image, this.nombre });
 }
