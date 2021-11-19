@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/register_doctor.dart';
+import 'screens/register_med.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: Register_doctor(),
+      home: Register_med(),
     );
   }
 }
