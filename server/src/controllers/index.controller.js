@@ -142,6 +142,19 @@ const getTrimestre = async (req, res) => {
     res.json(response.rows);
 }
 
+const addMedico = async (req, res) => {
+    const {id_medico, id_usuario} = req.body;
+    const response = await pool.query("update usuarios set medico =$1  where id_usuario = $2", [id_medico, id_usuario]);
+    res.json({
+        statusCode: 200,
+        message: 'Medico Agregado',
+        body: {
+            medical_register: {id_medico, id_usuario}
+        }
+    })
+};
+
+
 
 module.exports = { 
     login,
@@ -162,5 +175,6 @@ module.exports = {
     getResumenSintomaSangrados,
     getResumenSintomaCalambres,
     getResumen,
-    getTrimestre
+    getTrimestre,
+    addMedico
 }

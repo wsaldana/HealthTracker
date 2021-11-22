@@ -5,7 +5,8 @@ const { login,
     getUsuarios, getUsuario, getUsuarioByNombre, addUsuario, getPacientesByMedico,
     getHistoriales, getHistorialById, addHistorial,  
     addRegistroSintomas, getListRegistrosSintomas, getRegistroSintomas, 
-    getResumenSintomasDolorDeCabeza, getResumenSintomaMolestiaEspaladaBaja, getResumenSintomaDiarrea, getResumenSintomaSangrados, getResumenSintomaCalambres, getResumen, getTrimestre 
+    getResumenSintomasDolorDeCabeza, getResumenSintomaMolestiaEspaladaBaja, getResumenSintomaDiarrea, getResumenSintomaSangrados, getResumenSintomaCalambres, getResumen, getTrimestre, 
+    addMedico
 } = require('../controllers/index.controller');
 
 router.get('/login', login);
@@ -32,5 +33,7 @@ router.get('/sintomas/SangradosResumen/:id_usuario', getResumenSintomaCalambres)
 router.get('/sintomas/resumen/:id_usuario', getResumen)
 
 router.get('/sintomas/trimestre/:id_usuario',getTrimestre)
+
+router.put('/medico/', addMedico)
 
 module.exports = router;

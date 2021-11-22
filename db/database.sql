@@ -227,3 +227,12 @@ ADD CONSTRAINT rango_trimestre
 CHECK (
 	trimestre >= 1 and trimestre <=4
 );
+
+select *from medicos m
+
+select * from usuarios u 
+
+
+update usuarios 
+set medico = 2
+where id_usuario = '2'
