@@ -21,10 +21,14 @@ jobs:
           flutter-version: '1.x'
           channel: 'stable'
       - name: Install dependencies
+        working-directory: ./app/healthtracker
         run: flutter pub get
       - name: Format code
+        working-directory: ./app/healthtracker
         run: flutter format --set-exit-if-changed .
       - name: Static analysis
+        working-directory: ./app/healthtracker
         run: flutter analyze
       - name: Flutter tests
+        working-directory: ./app/healthtracker
         run: flutter test
