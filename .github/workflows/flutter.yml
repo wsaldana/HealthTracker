@@ -26,12 +26,6 @@ jobs:
       - name: Clean cache
         working-directory: ./app/healthtracker
         run: flutter pub cache repair
-      - name: Format code
-        working-directory: ./app/healthtracker
-        run: flutter format --set-exit-if-changed .
-      - name: Static analysis
-        working-directory: ./app/healthtracker
-        run: flutter analyze
       - name: Flutter tests
         working-directory: ./app/healthtracker
         run: flutter test
