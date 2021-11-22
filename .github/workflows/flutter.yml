@@ -20,6 +20,9 @@ jobs:
         with:
           flutter-version: '1.x'
           channel: 'stable'
+      - name: Clean cache
+        working-directory: ./app/healthtracker
+        run: flutter pub cache repair
       - name: Install dependencies
         working-directory: ./app/healthtracker
         run: flutter pub get
