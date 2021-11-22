@@ -14,6 +14,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./app/healthtracker
 
     steps:
       - uses: actions/checkout@v2
@@ -25,7 +27,6 @@ jobs:
       - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
 
       - name: Install dependencies
-        run: cd app/healthtracker
         run: dart pub get
 
       # Uncomment this step to verify the use of 'dart format' on each commit.
