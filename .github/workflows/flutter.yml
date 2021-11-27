@@ -15,11 +15,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '12.x'
-      - name: Flutter setup
-        uses: subosito/flutter-action@v1
-        with:
-          flutter-version: '2.2.3'
-          channel: 'stable'
       - name: Install dependencies
         working-directory: ./app/healthtracker
         run: flutter pub get
